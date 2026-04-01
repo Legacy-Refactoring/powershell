@@ -13,7 +13,13 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
       - ./seeder.sql:/docker-entrypoint-initdb.d/02-seeder.sql:ro
 
-  lang:
+  powershell:
+    image: mcr.microsoft.com/powershell:7.4-ubuntu-22.04
+    container_name: legacy_powershell
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: pwsh legacy.ps1
 
 volumes:
   postgres_data:
